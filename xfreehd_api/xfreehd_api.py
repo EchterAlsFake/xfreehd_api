@@ -5,10 +5,6 @@ Licensed under LGPLv3
 If you haven't received the license with this library, see: https://www.gnu.org/licenses/lgpl-3.0.en.html
 Only use this library under your local laws. I do not endorse any copyright infringement.
 """
-import os.path
-import traceback
-import math
-
 from bs4 import BeautifulSoup
 
 try:
@@ -17,9 +13,11 @@ except (ModuleNotFoundError, ImportError):
     from .modules.consts import *
 
 
+import math
+import os.path
 import logging
+import traceback
 
-from httpx import Response
 from typing import Optional
 from functools import cached_property
 from base_api import BaseCore, setup_logger
@@ -73,6 +71,10 @@ class Video:
     @cached_property
     def thumbnail(self) -> str:
         return REGEX_THUMBNAIL.search(self.html_content).group(1)
+
+    @cached_property
+    def length(self) -> str:
+        return REGEX_VIDEO_DURATION.search(self.html_content).group(1)
 
     @cached_property
     def cdn_urls(self) -> list:

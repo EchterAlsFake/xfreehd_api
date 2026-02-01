@@ -1,4 +1,4 @@
-<h1 align="center">XVIDEOS API</h1> 
+<h1 align="center">xFreeHD API</h1> 
 
 <div align="center">
     <a href="https://pepy.tech/project/xfreehd_api"><img src="https://static.pepy.tech/badge/xfreehd_api" alt="Downloads"></a>
@@ -6,22 +6,31 @@
     <a href="https://echteralsfake.me/ci/xfreehd_api/badge.svg"><img src="https://echteralsfake.me/ci/xfreehd_api/badge.svg" alt="Sync API Tests"/></a>
     </div>
 
-# Description
-xFreeHD API is an API for xfreehd.com. It allows you to fetch information from videos using web scraping.
-
 # Disclaimer
-> [!IMPORTANT] 
-> xfreehd API is in violation to the ToS of xfreehd.com!
-> If you are the website owner of xfreehd.com, contact me at my E-Mail, and I'll take this repository immediately offline.
-> EchterAlsFake@proton.me
+> [!IMPORTANT]
+> This is an unofficial and unaffiliated project. Please read the full disclaimer before use:
+> **[DISCLAIMER.md](https://github.com/EchterAlsFake/API_Docs/blob/master/Disclaimer.md)**
+>
+> By using this project you agree to comply with the target site’s rules, copyright/licensing requirements,
+> and applicable laws. Do not use it to bypass access controls or scrape at disruptive rates.
 
 # Features
-- Fetch all information from videos
-- Download videos in SD / HD quality without logging in
-- Fetch images from albums
+- Fetch videos + metadata
+- Download videos
+- Fetch album images
+- Built-in caching
+- Easy interface
+- Great type hinting
 - Proxy support
-- (See more in the documentation)
+- Very customizable
 
+# Supported Platforms
+This API has been tested and confirmed working on:
+
+- Windows 11 (x64) 
+- macOS Sequoia (x86_64)
+- Linux (Arch) (x86_64)
+- Android 16 (aarch64)
 
 # Quickstart
 ### Have a look at the [Documentation](https://github.com/EchterAlsFake/API_Docs/blob/master/Porn_APIs/xfreehd.md) for more details

@@ -22,6 +22,13 @@ from typing import Optional
 from functools import cached_property
 from base_api import BaseCore, setup_logger
 
+try:
+    import lxml
+    parser = "lxml"
+
+except (ModuleNotFoundError, ImportError):
+    parser = "html.parser"
+
 
 class Video:
     def __init__(self, url: str, core: Optional[BaseCore] = None):
@@ -29,7 +36,7 @@ class Video:
         self.core = core
         self.logger = setup_logger(name="XFreeHD API - [Video]", log_file=None, level=logging.ERROR)
         self.html_content = self.core.fetch(self.url)
-        self.soup = BeautifulSoup(self.html_content, "lxml")
+        self.soup = BeautifulSoup(self.html_content, parser)
 
     def enable_logging(self, log_file: str = None, level = None, log_ip: str = None, log_port: int = None):
         self.logger = setup_logger(name="XFreeHD API - [Video]", log_file=log_file, level=level, http_ip=log_ip, http_port=log_port)
@@ -114,7 +121,7 @@ class Album:
         self.core = core
         self.logger = setup_logger(name="XFreeHD API - [Album]", log_file=None, level=logging.ERROR)
         self.html_content = self.core.fetch(self.url)
-        self.soup = BeautifulSoup(self.html_content, "lxml")
+        self.soup = BeautifulSoup(self.html_content, parser)
 
     def enable_logging(self, log_file: str = None, level = None, log_ip: str = None, log_port: int = None):
         self.logger = setup_logger(name="XFreeHD API - [Album]", log_file=log_file, level=level, http_ip=log_ip, http_port=log_port)
@@ -128,7 +135,7 @@ class Album:
         """
         Calculates the total amount of pages
         """
-        soup = BeautifulSoup(self.html_content, "lxml")
+        soup = BeautifulSoup(self.html_content, parser)
         text = soup.find("div", class_="panel panel-default").find("div",class_="panel-body").text.strip()
 
         start = int(REGEX_ALBUM_START.search(text).group(1))
@@ -142,7 +149,7 @@ class Album:
         return math.ceil(total / per_page)
 
     def _scrape_images(self, html: str) -> list:
-        soup = BeautifulSoup(html, "lxml")
+        soup = BeautifulSoup(html, parser)
         divs = soup.find_all("div", class_="thumb-overlay album-thumb")
         a_tags = [div.find("a") for div in divs]
         urls = [a.get("href") for a in a_tags]

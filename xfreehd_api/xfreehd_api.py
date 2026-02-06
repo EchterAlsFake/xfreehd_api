@@ -17,6 +17,7 @@ import math
 import os.path
 import logging
 import traceback
+import threading
 
 from typing import Optional
 from functools import cached_property
@@ -89,7 +90,7 @@ class Video:
         urls = [tag.get("src") for tag in tags]
         return urls
 
-    def download(self, quality: str = "hd", no_title: bool = False, path="./", callback=None):
+    def download(self, quality: str = "hd", no_title: bool = False, path="./", callback=None, stop_event: threading.Event = None):
         cdn_urls = self.cdn_urls
 
         if len(cdn_urls) == 2: # There's no further quality specification other than HD / SD...
@@ -106,7 +107,7 @@ class Video:
             path = os.path.join(path, f"{self.title}.mp4")
 
         try:
-            self.core.legacy_download(url=download_url, path=path, callback=callback)
+            self.core.legacy_download(url=download_url, path=path, callback=callback, stop_event=stop_event)
             return True
 
         except Exception:

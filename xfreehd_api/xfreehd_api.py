@@ -87,13 +87,12 @@ class Video:
     @cached_property
     def video_qualities(self) -> list:
         # This might not be perfectly accurate, but I just need this working for Porn Fetch, so this is fine
-        qualities = []
 
         if len(self.cdn_urls) == 2:
-            qualities.append([480, 720]) # HD should include 480 and 720 as to my definitions of what "HD" is
+            qualities = [480, 720] # HD should include 480 and 720 as to my definitions of what "HD" is
 
         elif len(self.cdn_urls) == 1:
-            qualities.append(480) # SD should be like 480 idk
+            qualities = [480] # SD should be like 480 idk
 
         else:
             qualities = []

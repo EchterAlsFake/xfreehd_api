@@ -85,6 +85,22 @@ class Video:
         return REGEX_VIDEO_DURATION.search(self.html_content).group(1)
 
     @cached_property
+    def video_qualities(self) -> list:
+        # This might not be perfectly accurate, but I just need this working for Porn Fetch, so this is fine
+        qualities = []
+
+        if len(self.cdn_urls) == 2:
+            qualities.append([480, 720]) # HD should include 480 and 720 as to my definitions of what "HD" is
+
+        elif len(self.cdn_urls) == 1:
+            qualities.append(480) # SD should be like 480 idk
+
+        else:
+            qualities = []
+
+        return qualities
+
+    @cached_property
     def cdn_urls(self) -> list:
         tags = self.soup.find_all("source", attrs={"src": True, "title": True, "type": "video/mp4"})
         urls = [tag.get("src") for tag in tags]
